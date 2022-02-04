@@ -19,7 +19,6 @@ export function SnakeEventListener(){
             event.preventDefault();
             if(BorderOnOrOff){
                 switch(event.key){
-
                     // remember that the y is changed 1 = -1, -1 = 1
 
                     case snakeMoves.Up:
@@ -58,7 +57,7 @@ export function SnakeEventListener(){
         });
     });
 
-    gameBoardElement.addEventListener('mouseout', function () {
+    gameBoardElement.addEventListener('mouseout', function() {
         takeOutRedBorder();
     })
 }

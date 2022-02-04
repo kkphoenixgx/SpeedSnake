@@ -1,18 +1,18 @@
 //importations
-import {default as Snake} from "./Player/Snake/SnakeIndex.js"
-
 import { gameBoard } from "./Entities/Board/BoardIndex.js";
 import {startOrStop} from './Inputs/playButton.js'
+import { default as Level } from "./Levels/LevelsIndex.js";
+
 import { SnakeEventListener } from "./Player/Snake/snakeInputs.js";
-import { default as Level } from "./Levels/LevelsIndex.js"
-import {default as Apple} from './Entities/Apples/RedApple/RedAppleIndex.js'
 
 let lastTimeRender = 0;
-// creating a snake into the game
-export var GameSnake = new Snake;
 
 // levels variable
 var level = new Level(1);
+
+// game Snake
+var GameSnake = level.gameSnake;
+var GameRedApple = level.gameRedApple;
 
 function gameLoop(time){
     //gameLoop
@@ -35,6 +35,7 @@ function gameLoop(time){
     // The draw function has the responsibility to just draw
     function draw(){
         GameSnake.drawSnake();
+        GameRedApple.drawRedApple();
     }
     
     // The game update function, everything that you put here, will be constantly updated
@@ -43,6 +44,7 @@ function gameLoop(time){
         if(startOrStop === true){
             SnakeEventListener();
             GameSnake.updateSnake();
+            GameRedApple.updateRedApple();
             level.executeLevel();
         }
     }
