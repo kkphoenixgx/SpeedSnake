@@ -15,6 +15,8 @@ export default class RedApple{
         this.redAppleElements = [];
         this.drawRedApple();
 
+        // console.log(gameBoard)
+
     }
     
     // ----GameFunctions----
@@ -72,6 +74,15 @@ export default class RedApple{
                 })
             }
         }
+        deleteAllRedApples(){
+
+            this.redAppleElements= [];
+            this.applePosition = [];
+            var lista = document.getElementsByClassName("redApple");
+            for(let i = lista.length - 1; i >= 0; i--){
+                lista[i].remove()
+            }
+        }
 
     // -----AppleFunctions------
 
@@ -79,14 +90,15 @@ export default class RedApple{
             if(! this.applePosition) return
             
             if(Array.isArray(this.applePosition)){
-                for(let i = 0; i < this.applePosition.length; i++){
-                    if(SnakePosition[SnakePosition.length -1].x === this.applePosition[i-1].x && SnakePosition[SnakePosition.length -1].y === this.applePosition[i-1].y){
-                        return true;
-                    }
-                }
+                
+                this.applePosition.some(position => {
+                    return (position.x === SnakePosition.x && position.y ===SnakePosition.y)
+                })
+
             }else{
-                if(! Array.isArray(SnakePosition)) return
-                if(SnakePosition[SnakePosition.length -1].x === this.applePosition.x && SnakePosition[SnakePosition.length -1].y === this.applePosition.y) return true;
+                if(Array.isArray(SnakePosition)) return
+
+                return(SnakePosition.x === this.applePosition.x && SnakePosition.y === this.applePosition.y);
             }
        
             return false

@@ -16,7 +16,6 @@ header{
     background-color: #000000d6;
     border-bottom: rgba(0, 0, 204, 0.568) solid 5px ;
     z-index: 3;
-    position: absolute;
     display: flex;
     justify-content: center;
 }
@@ -50,7 +49,7 @@ header .icons{
     width: auto;
     align-items: center;
 }
-.icons .appleShop{
+.icons .appleShopIcon{
     color: white;
     padding: 10px;
     font-size: 1.5em;
@@ -61,9 +60,16 @@ header .icons{
     font-size: 1.5em;
 }
 
+.appleShop{
+    width: 50px;
+    height: 50px;
+    background-color: grey;
+    display: none;
+}
+
 /*-----section-----*/
 
-section .content{
+section {
     height: 50vw;
     width: 100%;
     background: url("./img/background.jpg") no-repeat;
@@ -72,21 +78,20 @@ section .content{
 }
 
 #game{
-    width: 500px;
-    height: 500px;
-    justify-content: center;
-    align-items: center;
+    width: 48%;
+    height: 0;
+    padding-bottom: 48%;
     background-color: black;
-    position: absolute;
-    top: 115px;
-    left: 32vw;
+    margin: 0 auto;
+    position: relative;
+    top: 1vh;
+    z-index: 10;
 }
 
 #game .gameBoard{
     width: 100%;
     height: 100%;
-
-
+    position: absolute;
     display: grid;
     grid-template-columns: repeat(21, 1fr);
     grid-template-rows: repeat(21, 1fr);
@@ -127,16 +132,28 @@ footer .container{
 }
 /*----colums----*/
 
-    /*----Colum1-----*/
+    /*----Colum1 & 3-----*/
+    .row .colum1, .colum3{
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
     .row .colum1{
         border-left: black 3px solid;
         border-right: black 1.5px solid;
-        display: flex;
-       justify-content: center;
     }
-    .colum1 h2{
+    .row .colum3{
+        border-left: black 1.5px solid;
+        border-right: black 3px solid;
+    }
+    .colum1 h2, .colum3 h2{
         color: white;
         margin-top: 8%;
+    }
+    .colum3 p, .colum1 p{
+        color: white;
+        font-size: 2rem;
     }
 
     /*----Colum2-----*/
@@ -148,6 +165,7 @@ footer .container{
         align-items: center;
         flex-flow: column;
     }
+
     .colum2 button {
         font-size: 16px;
         letter-spacing: 2px;
@@ -173,39 +191,6 @@ footer .container{
         background-color: rgb(158, 17, 28) ;
     }
 
-    /*----Colum3-----*/
-    .row .colum3{
-        border-left: black 1.5px solid;
-        border-right: black 3px solid;
-        align-items: center;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-    }
-    .colum3 i{
-        position: relative;
-        top: 3px;
-        left: 12px;
-    }
-    .colum3 h2{
-        font-size: 2em;
-    }
-    .colum3 h3{
-        font-size: 1em;
-        margin-left: 19px;
-    }
-    .colum3 a {
-        color: #000000;
-        text-decoration: none;
-    }
-    .email{
-        display: flex;
-    }
-    #gitHibIcon{
-        top:1px;
-        left: -3px;
-    }
-
 /* ---------------snow---------------- */
 
 section .snow{
@@ -213,7 +198,7 @@ section .snow{
     top: 0;
     left: 0;
     width: 66%;
-    height: 45%;
+    height: 66%;
     pointer-events: none;
     animation: animate 8s ease-in-out infinite,
                backgroundmove 16s linear infinite;
@@ -265,5 +250,26 @@ section .snow.snow8{
     }
     100%{
         transform: scale(2)
+    }
+}
+
+@media screen and (max-width: 700px) {
+    /* #game{
+        width:400px;
+        height:400px;
+        left: 22vw;
+        top: 179px;
+    } */
+
+    section .content{
+        height:100vh;
+    }
+
+    .colum1 h2{
+        margin-top: 1%;
+    }
+
+    .row *{
+        width: 32%
     }
 }

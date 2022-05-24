@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="./Style/Style.css">
         
-        <script type="module" defer src="./Game/Index.js"></script>
+        <script type="module" defer src="./Src/Index.js"></script>
 
         <link rel="icon" type="image/png" href="./Style/img/token_1 (6).png">
         <title>Speed Snake</title>
@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     </head>
+
     <body>
 
         <header>
@@ -22,13 +23,19 @@
                 <h1>Speed Snake</h1>
             </div>
             <div class="icons">
-                <i class="fas fa-apple-alt appleShop"></i>
+                <i class="fas fa-apple-alt appleShopIcon"></i>
+                <div class="appleShop">
+                    <!-- Cria aqui um item que faz a cobrinha ganhar mais uma vida, mas volta com 0 -->
+                </div>
                 <i class="fas fa-wrench config"></i>
             </div>
             <!-- cria um botão para desligar e ligar o som e uma lojinha que dá para comprar checkpoints com maçãs comidas-->
         </header>
 
         <section>
+            <div id="game">
+                <div class="gameBoard"></div>
+            </div>
             <div class="content">
                 <div class="snow snow1"></div>
                 <div class="snow snow2"></div>
@@ -39,9 +46,6 @@
                 <div class="snow snow7"></div>
                 <div class="snow snow8"></div>
             </div>
-            <div id="game">
-                <div class="gameBoard"></div>
-            </div>
         </section>
 
         <footer>
@@ -49,6 +53,7 @@
                 <div class="row">
                     <div class="col-md-4 colum1">
                         <h2>Best Score</h2>
+                        <p>0</p>
                     </div>
 
                     <div class="col-md-4 colum2">
@@ -57,24 +62,13 @@
                     </div>
 
                     <div class="col-md-4 colum3">
-                        <h2>Contact me</h2>
-
-                        <div class="email">
-                            <i class="far fa-envelope"></i>
-                            <h3>: kauaalvesworkplace@gmail.com</h3>
-                        </div>
-                        <div class="github">
-                            <i class="fab fa-github-square" id="gitHibIcon" ></i>
-                            <a href="https://github.com/kkphoenixgx?tab=repositories" alt="link">Click me to check kkphoenix's github</a>
-                        </div>
+                        <h2>Current apples</h2>
+                        <p>0</p>
                     </div>
                 </div>                
             </div>
         </footer>
 
     </body>
-<<<<<<< HEAD
+
 </html>
-=======
-</html>
->>>>>>> c5100162f282e03f83b26f32ff6e9e05c2fb485a

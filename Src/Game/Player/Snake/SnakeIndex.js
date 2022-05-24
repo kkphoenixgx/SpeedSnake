@@ -1,5 +1,7 @@
 import { getInputDirection } from "./snakeInputs.js";
 import { gameBoard } from "../../Entities/Board/BoardIndex.js";
+import {colliders , default as Level} from "../../Levels/LevelsIndex.js"
+import { level } from "../../gameIndex.js"
 
 export default class Snake {
     
@@ -16,17 +18,28 @@ export default class Snake {
 
     //-------Methods------
         
-        //it updates the snake on the screen
+        // ------Loops-----
+
         updateSnake(){
+            colliders.forEach(collider => {
+
+                if(this.snakeCollision(collider) === 'Head Collided'){
+                    level.onCollision();
+                    console.log(level.level);
+                }
+
+            })
 
             this.getInputDirections()
               .then( dataInputDirection => {
-    
+
                   // actions
                   this.snakeBody[this.snakeBody.length-1].x += dataInputDirection.x;
                   this.snakeBody[this.snakeBody.length-1].y += dataInputDirection.y;
-
-                  moveSnakeSegments(dataInputDirection);
+                  
+                  setTimeout(() => {
+                      this.moveSnakeSegments(dataInputDirection);
+                  }, 1000)
 
               })
               .catch( err => console.error(err));
@@ -39,12 +52,10 @@ export default class Snake {
                 let snakePartElement = document.createElement("div");
 
                 // if there is the first add the css class 
-                    console.log(this.snakeBody[this.snakeBody.length-1]);
-                    console.log(this.snakeBody[i]);
-
-                    if(this.snakeBody[this.snakeBody.length-1] == this.snakeBody[i]){
+                
+                    if(JSON.stringify(this.snakeBody[this.snakeBody.length-1]) === JSON.stringify(this.snakeBody[i])){
                         snakePartElement.classList.add('snakeHead');
-                        snakePartElement = this.snakeHeadElement;
+                        this.snakeHeadElement = snakePartElement;
                     }
                     if(this.snakeBody[this.snakeBody.length-1] != this.snakeBody[i]) snakePartElement.classList.add('snake');
             
@@ -58,21 +69,43 @@ export default class Snake {
 
         }
         
+        // ------Actions-------
+
         moveSnakeSegments(dataInputDirection){
+
+            // for(let i = 0; i < this.snakeBody.length; i++){
+
+            //     if(this.snakeBody[i] == this.snakeBody[this.snakeBody.length-1]) return
+
+            //     setTimeout(()=> {
+
+            //         this.snakeBody[i] = {... this.snakeBody}
+
+            //     },300);
+            // }
+        }
+
+        snakeCollision(ColliderPosition){
 
             for(let i = 0; i < this.snakeBody.length; i++){
 
-                if(this.snakeBody[i-1] == this.snakeBody[this.snakeBody.length-1]) return
+                if(ColliderPosition.x === this.snakeBody[i].x && ColliderPosition.y === this.snakeBody[i].y){
 
-                console.log(dataInputDirection);
-
-                // this.snakeBody[i -1].x += dataInputDirection.x;
-                // this.snakeBody[i -1].y += dataInputDirection.y;
-
+                    if(this.snakeBody[i] == this.snakeBody[this.snakeBody.length -1]) return 'Head Collided'
+                    return `Snake collided`
+                
+                }
             }
-
         }
 
+        // ----- Side Methods -----
+
+        getAllSnakePartsPositions(){
+            return this.snakeBody
+        }
+        getHeadPosition(){
+            return this.snakeBody[this.snakeBody.length -1]
+        }
         getInputDirections(){
             
             let getInputDirections = new Promise((resolve, reject) => {
@@ -89,22 +122,5 @@ export default class Snake {
             })
 
             return getInputDirections;
-        }
-
-        snakeCollision(ColliderPosition){
-
-            for(let i = 0; i < this.snakeBody.length; i++){
-
-                if(ColliderPosition.x === this.snakeBody[i-1].x && ColliderPosition.y === this.snakeBody[i -1].y){
-
-                    if(this.snakeBody[i-1] == this.snakeBody[this.snakeBody.length -1]) return 'Head Collided'
-                    return `Snake collided`
-                
-                }
-            }
-        }
-
-        getAllSnakePartsPositions(){
-            return this.snakeBody
         }
 }
