@@ -2,13 +2,15 @@
   "name": "speedsnake",
   "version": "0.0.1",
   "description": "My snake game",
-  "main": "index.html",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kkphoenix",
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "^5.1.3"
+    "bootstrap": "^5.1.3",
+    "electron": "^19.0.6"
   }
 }
